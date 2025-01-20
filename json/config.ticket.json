@@ -1,0 +1,11 @@
+{
+  "config_principais": {
+    "cargo_staff": "1329293503410339927",
+    "canal_logs": "1329293503431446608",
+    "categoria_ticket": "1329293504169644098"
+  },
+  "config_dentro": {
+    "banner": "",
+    "texto": "👋 | Olá {user}, seja bem vindo(a) ao seu ticket!\n❗ | Evite marcações, aguarde até que um staff te atenda.\n👥 | Quem assumiu: {assumido}\n\n📝  | Assunto do Ticket: ``` {motivo}  ```"
+  }
+}
