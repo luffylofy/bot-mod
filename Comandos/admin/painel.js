@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
-const config = require("../../config.json");
-const {
-    ButtonBuilder,
+const config = require("../../config.js");
+const { ButtonBuilder,
     EmbedBuilder,
     ButtonStyle,
     ActionRowBuilder
@@ -57,9 +56,17 @@ module.exports = {
                         .setStyle(ButtonStyle.Primary)
                         .setEmoji("🔑")
                     )
+            const botõesconfig3 = new Discord.ActionRowBuilder()
+                .addComponents(
+                    new ButtonBuilder()
+                        .setCustomId("vips")
+                        .setLabel("Gerenciar Sistema de Vips")
+                        .setStyle(ButtonStyle.Primary)
+                        .setEmoji("💎")
+                    )
 
             interaction.reply({
-                embeds: [embedconfig], components: [botõesconfig1, botõesconfig2], flags: 64
+                embeds: [embedconfig], components: [botõesconfig1, botõesconfig2, botõesconfig3], flags: 64
             })
         }
     }

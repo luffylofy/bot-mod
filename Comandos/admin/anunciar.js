@@ -1,5 +1,5 @@
 const { EmbedBuilder, PermissionFlagsBits, ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, ModalBuilder, TextInputBuilder, TextInputStyle, ApplicationCommandType, ApplicationCommandOptionType } = require("discord.js")
-const config = require('../../config.json')
+const config = require('../../config.js')
 
 module.exports = {
     name: 'anunciar',
