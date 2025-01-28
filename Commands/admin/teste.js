@@ -36,44 +36,44 @@ module.exports = {
                 components: [
                     new Discord.ActionRowBuilder().addComponents(
                         new Discord.StringSelectMenuBuilder()
-                            .setCustomId("ticket_options")
+                            .setCustomId("ticket_options1")
                             .setPlaceholder("Selecione uma opção")
                             .setMinValues(1)
                             .setMaxValues(1)
                             .setOptions(
                                 {
                                     label: "Título",
-                                    value: "add-titule",
+                                    value: "add-titule1",
                                     emoji: "<:custom:1333531876421271747>",
                                 },
                                 {
                                     label: "Descrição",
-                                    value: "alterar-desc",
+                                    value: "alterar-desc1",
                                     emoji: "<:papel:1333763503466745940>",
                                 },
                                 {
                                     label: "Cor",
-                                    value: "alterar-cor",
+                                    value: "alterar-cor1",
                                     emoji: "<:cores:1333760253241851914>",
                                 },
                                 {
                                     label: "Rodapé",
-                                    value: "add-footer",
+                                    value: "add-footer1",
                                     emoji: "<:email:1333763593115799602>",
                                 },
                                 {
                                     label: "Banner",
-                                    value: "add-image",
+                                    value: "add-imagem1",
                                     emoji: "<:banner:1333760998569414656>",
                                 },
                                 {
                                     label: "Enviar Ticket",
-                                    value: "enviar_ticket",
+                                    value: "enviar_ticket1",
                                     emoji: "<:seta:1333764063334891581>",
                                 },
                                 {
                                     label: "Atualizar",
-                                    value: "reiniciar-ticket",
+                                    value: "reiniciar-ticket1",
                                     emoji: '<a:carregando:1333762105383583775>',
                                 },
                             ),
