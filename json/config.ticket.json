@@ -1,11 +1,11 @@
 {
   "config_principais": {
     "cargo_staff": "1330918149088084028",
-    "canal_logs": "1330934630253068321",
-    "categoria_ticket": "1330882939445313597"
+    "canal_logs": "1331268204617666591",
+    "categoria_ticket": "1330882939445313598"
   },
   "config_dentro": {
-    "banner": "",
+    "banner": "https://media.discordapp.net/attachments/1331684250508066827/1333853714523619398/yHTqgU7I_VDkfO7kNBn8HfubyKs8UJ69kO1L-nnyStM.webp?ex=679a6793&is=67991613&hm=bd288ba5942eaada91c415d81eacda091e6cf617295616cc7adff36f27d0fc51&=&format=webp&width=1025&height=410",
     "texto": "👋 | Olá {user}, seja bem vindo(a) ao seu ticket!\n❗ | Evite marcações, aguarde até que um staff te atenda.\n👥 | Quem assumiu: {assumido}\n\n📝  | Assunto do Ticket: ``` {motivo}  ```"
   }
 }

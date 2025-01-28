@@ -1,5 +1,5 @@
-const Discord = require('discord.js')
-
+const Discord = require('discord.js');
+const config = require('./config.json')
 const client = new Discord.Client({
     intents: [
         Discord.IntentsBitField.Flags.DirectMessages,
@@ -21,7 +21,7 @@ const client = new Discord.Client({
     ]
 })
 
-require('./Handler/comandos')(client)
+require('./Handler/commands')(client)
 require('./Handler/events')(client)
 
 client.on('interactionCreate', (interaction) => {
@@ -36,13 +36,11 @@ client.on('interactionCreate', (interaction) => {
     }
 })
 
-const config = require('./config')
-client.login(config.discord.token)
+client.login(config.token)
 
-const Database = require('./Modules/Database/Database.js')
-const db = new Database(config.mongo_db.uri)
-
-db.connect()
+client.on('ready', () => {
+    console.log(`✅ Logado em ${client.user.tag}`.green);
+})
 
 process.on('unhandledRejection', (reason, p) => {
   console.error('[ Event Error: unhandledRejection ]', p, 'reason:', reason)
@@ -53,5 +51,6 @@ process.on("uncaughtException", (err, origin) => {
 process.on('uncaughtExceptionMonitor', (err, origin) => {
   console.error('[ Event Error: uncaughtExceptionMonitor ]', err, origin);
 })
-
-module.exports = client
+    client.on("interactionCreate", require('./Events/setar').execute);
+    client.on("interactionCreate", require('./Events/ticket').execute);
+    client.on("interactionCreate", require('./Events/botconfig').execute);
