@@ -4,7 +4,7 @@ const perms = require("../../json/perms.json");
 
 module.exports = {
     name: "setar_botao",
-    description: "Envie o painel de tickets.",
+    description: "Envie o painel de tickets com botões.",
     type: Discord.ApplicationCommandType.ChatInput,
 
     run: async (client, interaction) => {
