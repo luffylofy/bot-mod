@@ -3,7 +3,7 @@ const config = require("../../config.json");
 const perms = require("../../json/perms.json");
 
 module.exports = {
-    name: "setar_botao",
+    name: "setar_painel",
     description: "Envie o painel de tickets.",
     type: Discord.ApplicationCommandType.ChatInput,
 
