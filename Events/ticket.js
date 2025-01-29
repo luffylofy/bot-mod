@@ -9,6 +9,7 @@ const transcript = require("discord-html-transcripts");
 const randomString = require("randomized-string");
 const fs = require("fs");
 const assumedFilePath = "json/assumidos.json";
+const config = require('../config.json')
 function readAssumedData() {
     try {
         const data = fs.readFileSync(assumedFilePath, "utf8");
@@ -27,38 +28,6 @@ module.exports = {
         const rawData = fs.readFileSync("json/config.ticket.json");
         const config = JSON.parse(rawData);
 
-        if (interaction.customId === "painel-ticket") {
-            interaction.reply({
-                embeds: [
-                    new Discord.EmbedBuilder()
-                    .setColor("#2b2d30")
-                    .setDescription(`*Selecione o tipo de ticket que você deseja criar selecionando no menu abaixo.*`),
-                ],
-                components: [
-                    new Discord.ActionRowBuilder()
-                    .addComponents(
-                        new Discord.StringSelectMenuBuilder()
-                        .setCustomId("abrir-ticket")
-                        .setPlaceholder("Selecione a categoria:")
-                        .addOptions([{
-                            label: "Realizar Suporte",
-                            description: "Tickets relacionados a suporte apenas.",
-                            emoji: "☎️",
-                            value: "suporte"
-                        },
-                            {
-                                label: "Reportar Bugs",
-                                description: "Tickets relacionados a reportar bugs apenas.",
-                                emoji: "📡",
-                                value: "bugs"
-                            }])
-                    )
-                ],
-                flags: 64
-            })
-
-        }
-
         if (interaction.customId === "abrir-ticket") {
 
             const cleanUsername = interaction.user.username
@@ -73,9 +42,9 @@ module.exports = {
                 return interaction.reply({
                     embeds: [
                         new Discord.EmbedBuilder()
-                            .setColor(config.color)
+                            .setColor("Red")
                             .setDescription(
-                                `${emoji.errado} ${interaction.user} Você já possui um ticket aberto em ${channel}.`,
+                                `${emoji.errado} | Você já possui um ticket aberto em ${channel}`,
                             ),
                     ],
                     components: [
@@ -154,10 +123,10 @@ module.exports = {
                     permissionOverwrites: permissionOverwrites,
                 })
                 .then((channels) => {
-                    interaction.update({
+                     interaction.reply({
                         embeds: [
                             new Discord.EmbedBuilder()
-                                .setColor("#2b2d30")
+                                .setColor("#4293f5")
                                 .setDescription(
                                     `Seu ticket foi criado com sucesso no canal: ${channels.url}`,
                                 ),
@@ -172,7 +141,8 @@ module.exports = {
                         ],
                         flags: 64,
                     });
-                    const user = interaction.user;
+
+                    const user = interaction.user
                     db.set(`ticket_${channels.id}`, {
                         usuario: interaction.user.id,
                         motivo: motivo,
@@ -195,7 +165,7 @@ module.exports = {
                             motivo,
                             aaaaa,
                         ),
-                    );
+                    ).setColor("#4293f5");
 
                     if (ticket.config_dentro.banner) {
                         embeds.setImage(`${ticket.config_dentro.banner}`);
@@ -626,9 +596,36 @@ module.exports = {
                     flags: 64,
                 });
             } else {
+
+                let countdown = 3; // Inicializa o contador com 5 segundos
+
+                // Assumindo que você já fez a primeira resposta usando interaction.reply
                 interaction.reply({
-                    content: `Este ticket será excluído em \`5 segundos\``,
-                });
+                    embeds: [
+                        new Discord.EmbedBuilder()
+                            .setDescription(`Este ticket será excluído em \`${countdown} segundos\``)
+                            .setColor("Red")
+                    ],
+                    flags: 64,
+                }).then(() => {
+                
+                    const interval = setInterval(() => {
+                        if (countdown <= 0) {
+                            clearInterval(interval); 
+                        } else {
+                            
+                            interaction.editReply({
+                                embeds: [
+                                    new Discord.EmbedBuilder()
+                                        .setDescription(`Este ticket será excluído em \`${countdown} segundos\``)
+                                        .setColor("Red")
+                                ],
+                            });
+                
+                            countdown--;
+                        }
+                    }, 1000);
+                });                
 
                 setTimeout(() => {
                     interaction.channel.delete();
@@ -762,18 +759,18 @@ module.exports = {
                     .replace("{codigo}", codigo);
             }
 
-            const embeds = new Discord.EmbedBuilder().setDescription(
+            const embeds1 = new Discord.EmbedBuilder().setDescription(
                 substituirVariaveis(
                     config.config_dentro.texto,
                     user,
                     motivo,
                     codigo,
                 ),
-            );
-
-            if (ticket.config_dentro.thumbnail) {
-                embeds.setImage(`${ticket.config_dentro.thumbnail}`);
-            }
+            ).setColor("#4293f5");
+            
+        if (ticket.config_dentro.banner) {
+            embeds1.setImage(`${ticket.config_dentro.banner}`);
+        };
 
             if (
                 !interaction.member.permissions.has(
@@ -802,7 +799,7 @@ module.exports = {
                 });
 
                 interaction.update({
-                    embeds: [embeds],
+                    embeds: [embeds1],
                     components: [
                         new Discord.ActionRowBuilder().addComponents(
                             new Discord.ButtonBuilder()
@@ -1003,7 +1000,7 @@ module.exports = {
                         embeds: [
                             new Discord.EmbedBuilder().setDescription(
                                 `${emoji.errado} | Você não nenhuma possui uma call aberta!`,
-                            ),
+                            ).setColor("Red"),
                         ],
                         components: [],
                         flags: 64,
@@ -1015,7 +1012,7 @@ module.exports = {
                     embeds: [
                         new Discord.EmbedBuilder().setDescription(
                             `${emoji.certo} | Call deletada com sucesso!`,
-                        ),
+                        ).setColor("Green"),
                     ],
                     components: [],
                     flags: 64,
