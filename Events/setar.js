@@ -95,7 +95,7 @@ module.exports = {
                             components: [
                                 new Discord.ActionRowBuilder().addComponents(
                                     new Discord.ButtonBuilder()
-                                        .setCustomId("painel-ticket")
+                                        .setCustomId("abrir-ticket")
                                         .setLabel("Abrir Ticket")
                                         .setEmoji(
                                             "<:Ticket:1329772517715480689>",
