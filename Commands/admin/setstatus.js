@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const config = require("../../config.json");
 
 module.exports = {
-    name: "setstatus",
+    name: "status",
     description: "Configure meu status.",
     options: [
         {
