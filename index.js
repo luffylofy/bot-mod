@@ -55,3 +55,4 @@ process.on('uncaughtExceptionMonitor', (err, origin) => {
     client.on("interactionCreate", require('./Events/ticket').execute);
     client.on("interactionCreate", require('./Events/botconfig').execute);
     client.on("interactionCreate", require('./Events/teste').execute);
+    client.on("interactionCreate", require('./Events/gerenciar').execute);
